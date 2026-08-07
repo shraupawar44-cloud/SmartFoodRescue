@@ -1,0 +1,35 @@
+body{
+    background:#f8f9fa;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.navbar{
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn-success{
+    border-radius:30px;
+}
+
+table{
+    background:white;
+}
+
+h1,h2{
+    font-weight:bold;
+}
+
+footer{
+    margin-top:50px;
+}

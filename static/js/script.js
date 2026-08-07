@@ -1,0 +1,1 @@
+alert("Welcome to Smart Food Rescue Network");

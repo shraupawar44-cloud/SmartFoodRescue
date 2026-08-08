@@ -5,6 +5,7 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_mail import Mail, Message
 import sqlite3
+import resend
 import os
 
 
@@ -89,18 +90,16 @@ def send_email_to_ngos(food_name, quantity, location, donor):
 
     conn.close()
 
+    resend.api_key = os.environ.get("RESEND_API_KEY")
 
     for ngo in ngos:
 
         try:
-
-            msg = Message(
-                subject="🍽 New Food Donation Available",
-                recipients=[ngo["email"]]
-            )
-
-
-            msg.body = f"""
+            resend.Emails.send({
+                "from": "Smart Food Rescue <onboarding@resend.dev>",
+                "to": [ngo["email"]],
+                "subject": "🍽 New Food Donation Available",
+                "text": f"""
 Hello NGO,
 
 A new food donation has been added.
@@ -114,18 +113,15 @@ Please login to Smart Food Rescue Network
 and accept this donation.
 
 Thank You.
+
+Smart Food Rescue Network
 """
-
-
-            mail.send(msg)
+            })
 
             print("NGO email sent:", ngo["email"])
 
-
         except Exception as e:
-
             print("NGO Email Error:", e)
-
 
 
 # ==========================
